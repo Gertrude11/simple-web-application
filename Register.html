@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <style>
+       
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .registration-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 7px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+       
+        .text-center {
+            text-align: center;
+        }
+
+       
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+       
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 500px;
+        }
+        .radio-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: normal;
+
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 15px;
+        
+        }
+
+       
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            color: #fff;
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color:orange;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h2 class="text-center">Registration Form</h2>
+        <form id="form">
+            <span class="error-message" id="error"></span>
+            <div class="form-group">
+                <label for="NationalID/Passport">National ID/Passport:</label>
+                <input type="text" class="form-control" id="Id" placeholder="Enter your National ID/Passport">
+            </div>
+            <div class="form-group">
+                <label for="fullname">First Name:</label>
+                <input type="text" class="form-control" id="FirstName" placeholder="Enter your First Name">
+            </div>
+            <div class="form-group">
+                <label for="LastName:">Last Name:</label>
+                <input type="text" class="form-control" id="LastName" placeholder="Enter your Last Name:">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="Email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="Address">Address:</label>
+                <input type="text" class="form-control" id="Address" placeholder="Enter your address">
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number:</label>
+                <input type="text" class="form-control" id="PhoneNumber" placeholder="Enter your Phone Number">
+            </div>
+            <div class="form-group">
+                <label for="Faculty">Faculty:</label>
+                <input type="text" class="form-control" id="Faculty" placeholder="Enter your Faculty">
+            </div>
+            <div class="form-group">
+                <label for="Department">Department:</label>
+                <input type="text" class="form-control" id="Department" placeholder="Enter your Department">
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="Password" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm your password">
+            </div>
+            
+            <button type="submit" class="btn-primary">Register</button>
+            <div class="text-center login-links">
+                
+                <a href="Login.html">Already have an Account</a>
+            </div>
+        </form>
+    </div>
+
+    
+    <script>
+        const form =  document.getElementById("form")
+        const id = document.getElementById("Id")
+        const fname = document.getElementById('FirstName');
+        const lname = document.getElementById("LastName");
+        const email = document.getElementById('Email');
+        const address = document.getElementById('Address');
+        const faculty = document.getElementById('Faculty');
+        const department = document.getElementById('Department');
+        const phonenumber = document.getElementById('PhoneNumber');
+        const password = document.getElementById('Password');
+        const confirmpassword = document.getElementById('confirmpassword');
+        const errors = document.getElementById("Error");
+        
+
+
+        form.addEventListener('submit',(e) =>{
+            e.preventDefault();
+            checkInputs();
+        });
+        function checkInputs(){
+            const idValue = id.value.trim();
+            const fnameValue = fname.value.trim();
+            const lnameValue = lname.value.trim();
+            const emailValue = email.value.trim();
+            const phoneValue = phonenumber.value.trim();
+            const addressValue = address.value.trim();
+            const facultyValue = faculty.value.trim();
+            const departmentValue = department.value.trim();
+            const passwordValue = password.value.trim();
+            const confirmpasswordValue = confirmpassword.value.trim();
+            
+            
+           
+
+            if(fnameValue ===''||lnameValue===''||emailValue===''||addressValue===''||facultyValue===''
+            ||departmentValue===''||passwordValue===''||confirmpasswordValue===''||idValue===''||phoneValue===''){
+                document.getElementById("error").innerHTML = "All fields is required.";
+                return;       
+            }
+            if(!emailValue.includes("@")){
+                    document.getElementById("error").innerHTML = "Email should contain @";
+                return;  
+            }
+            if(idValue.length===11||idValue.length===5){
+                document.getElementById("error").innerHTML = "Id should be 11 or 7";
+                return;  
+            }
+            if(passwordValue.length<8||passwordValue.length>16 ){
+                document.getElementById("error").innerHTML = "Password should be not less than 8 or greater 16.";
+                return;  
+            }
+            if(passwordValue!==confirmpasswordValue ){
+                document.getElementById("error").innerHTML = "Password should be the same.";
+                return;  
+            }
+           
+            
+           
+         
+                alert("Successfully Registered")
+            
+        }
+    
+    </script>
+
+</body>
+</html>
